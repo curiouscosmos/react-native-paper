@@ -530,7 +530,8 @@ class Menu extends React.Component<Props, State> {
     const shadowMenuContainerStyle = {
       opacity: opacityAnimation,
       transform: scaleTransforms,
-      borderRadius: theme.isV3 ? 4 : theme.roundness,
+      borderRadius: theme.roundness,
+      elevation: theme.isV3 ? 0 : 8,
       ...(scrollableMenuHeight ? { height: scrollableMenuHeight } : {}),
     };
 
@@ -572,7 +573,6 @@ class Menu extends React.Component<Props, State> {
                     [
                       styles.shadowMenuContainer,
                       shadowMenuContainerStyle,
-                      theme.isV3 && styles.md3ShadowMenuContainer,
                       theme.isV3 && {
                         backgroundColor: color(theme.colors.surface)
                           .mix(color(theme.colors.primary), 0.08)
@@ -582,6 +582,7 @@ class Menu extends React.Component<Props, State> {
                       contentStyle,
                     ] as StyleProp<ViewStyle>
                   }
+                  {...(theme.isV3 && { elevation: rendered ? 2 : 0 })}
                 >
                   {(scrollableMenuHeight && (
                     <ScrollView>{children}</ScrollView>
@@ -603,10 +604,6 @@ const styles = StyleSheet.create({
   shadowMenuContainer: {
     opacity: 0,
     paddingVertical: 8,
-    elevation: 8,
-  },
-  md3ShadowMenuContainer: {
-    elevation: 3,
   },
 });
 
